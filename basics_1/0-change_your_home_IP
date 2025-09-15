@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# filepath: /Users/Dev/Holberton/holbertonschool-network/basics_1/0-change_your_home_IP
+
+# Remove existing localhost and facebook.com entries
+sudo sed -i '/localhost/d' /etc/hosts
+sudo sed -i '/facebook.com/d' /etc/hosts
+
+# Add new entries
+echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
+echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
