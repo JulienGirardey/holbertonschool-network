@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
-# filepath: /Users/Dev/Holberton/holbertonschool-network/basics_1/0-change_your_home_IP
+# Script to change localhost to 127.0.0.2 and facebook.com to 8.8.8.8
 
-# Supprime la ligne exacte '127.0.0.1 localhost'
-sudo sed -i '/^127\.0\.0\.1[[:space:]]\+localhost$/d' /etc/hosts
+# Make a backup
+sudo cp /etc/hosts /etc/hosts.backup
 
-# Ajoute '127.0.0.2 localhost' en haut du fichier
-sudo sed -i '1i127.0.0.2 localhost' /etc/hosts
-
-# Supprime toute ligne contenant 'facebook.com'
-sudo sed -i '/facebook.com/d' /etc/hosts
-
-# Ajoute '8.8.8.8 facebook.com' en bas du fichier
-echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
+# Use a simple approach - replace the entire hosts file content
+sudo bash -c 'cat > /etc/hosts << EOF
+127.0.0.2 localhost
+127.0.0.1 ip6-localhost ip6-loopback
+fe00::0 ip6-localnet
+ff00::0 ip6-mcastprefix
+ff02::1 ip6-allnodes
+ff02::2 ip6-allrouters
+8.8.8.8 facebook.com
+EOF'
