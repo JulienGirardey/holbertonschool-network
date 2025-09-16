@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 # filepath: /Users/Dev/Holberton/holbertonschool-network/basics_1/0-change_your_home_IP
 
-# Supprime les anciennes entrées localhost et facebook.com
-sudo sed -i '/localhost/d' /etc/hosts
-echo "127.0.0.2 localhost" | sudo tee -a /etc/hosts > /dev/null
+# Supprime la ligne exacte '127.0.0.1 localhost'
+sudo sed -i '/^127\.0\.0\.1[[:space:]]\+localhost$/d' /etc/hosts
 
+# Ajoute '127.0.0.2 localhost' en haut du fichier
+sudo sed -i '1i127.0.0.2 localhost' /etc/hosts
+
+# Supprime toute ligne contenant 'facebook.com'
 sudo sed -i '/facebook.com/d' /etc/hosts
+
+# Ajoute '8.8.8.8 facebook.com' en bas du fichier
 echo "8.8.8.8 facebook.com" | sudo tee -a /etc/hosts > /dev/null
